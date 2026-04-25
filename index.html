@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WXL-E STORE | Pro Tools</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="dark-theme">
+    
+    <nav>
+        <div class="logo">WXL-E <span>STORE</span></div>
+        <div class="nav-links">
+            <select id="langSwitcher" onchange="switchLanguage()">
+                <option value="ar">العربية</option>
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+            </select>
+            <span class="coins-display"><i class="fas fa-coins"></i> <span id="userCoins">0</span></span>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="card-container" id="mainCard">
+            <div class="card-chip"></div>
+            <div class="card-brand">WXL-E PLATINUM</div>
+            <div class="card-number">8821 • 4409 • 1102 • XXXX</div>
+            <div class="card-holder">HOLDER: @wxl_e</div>
+            <div class="card-secret">SECRET CODE: <span id="cardCode">******</span></div>
+        </div>
+        <button class="btn-neon" onclick="changeCardColor()">Change Color / تغيير اللون</button>
+    </section>
+
+    <div class="bonus-box">
+        <button onclick="claimDailyGift()" class="btn-gift"><i class="fas fa-gift"></i> الهدية اليومية (70+)</button>
+        <div class="ref-link">
+            <p>رابط الإحالة الخاص بك (اربح 50 عملة):</p>
+            <input type="text" readonly value="https://wxl-e-store.com/ref/user123" id="refUrl">
+            <button onclick="copyRef()">نسخ</button>
+        </div>
+    </div>
+
+    <main id="products-grid" class="products-grid">
+        </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
