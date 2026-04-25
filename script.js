@@ -1,58 +1,73 @@
-const products = [
-    { id: 1, name: "SOLX OSINT", price: 1000, desc: "أداة متقدمة لجمع المعلومات واختراق المصادر المفتوحة.", type: "py" },
-    { id: 2, name: "WebAnalyzer Pro", price: 800, desc: "تحليل شامل للسيرفرات واكتشاف الثغرات الأمنية.", type: "py" },
-    { id: 3, name: "CyberShield Toolkit", price: 500, desc: "حقيبة أدوات لتشفير وفك تشفير كلمات المرور.", type: "py" },
-    { id: 4, name: "Trading Course Zero", price: 2500, desc: "كورس احترافي للتداول من الصفر حتى استراتيجيات الحيتان.", type: "pdf" },
-    { id: 5, name: "Network Security Pro", price: 1500, desc: "تعلم حماية الشبكات وصد هجمات الـ DDoS باحترافية.", type: "pdf" }
+// قائمة الأدوات المستخرجة من ملفاتك
+const tools = [
+    { id: 1, name: "SOLX OSINT", price: 1200, icon: "🔍", desc: "نظام استخباراتي متطور لسحب البيانات العامة." },
+    { id: 2, name: "IPGRAM Pro", price: 850, icon: "🌐", desc: "أداة متخصصة في سحب وتحليل عناوين IP انستقرام." },
+    { id: 3, name: "BLAK WINDOW", price: 1500, icon: "🕸️", desc: "فاحص ثغرات المواقع والسيرفرات الشامل." },
+    { id: 4, name: "CyberShield Toolkit", price: 900, icon: "🛡️", desc: "مجموعة أدوات كسر وتشفير كلمات المرور." },
+    { id: 5, name: "DDOS WXLE V2", price: 2000, icon: "⚡", desc: "إطار عمل متطور لاختبار قدرة تحمل السيرفرات." },
+    { id: 6, name: "WebAnalyzer RUSS", price: 700, icon: "📊", desc: "تحليل معمق لهيكلة المواقع والبروتوكولات." },
+    { id: 7, name: "كورس تداول (صفر إلى احتراف)", price: 3000, icon: "📈", desc: "تعلم استراتيجيات الحيتان وإدارة المخاطر." },
+    { id: 8, name: "كورس أمن الشبكات", price: 2500, icon: "🔒", desc: "دليل عملي لاختراق وحماية الشبكات اللاسلكية." }
 ];
 
-let coins = localStorage.getItem('coins') || 0;
-document.getElementById('userCoins').innerText = coins;
+let userCoins = localStorage.getItem('userCoins') || 500; // رصيد تجريبي
+
+function login() {
+    const user = document.getElementById('username').value;
+    if (user) {
+        document.getElementById('auth-page').style.display = 'none';
+        document.getElementById('store-page').style.display = 'block';
+        updateUI();
+        renderProducts();
+    }
+}
 
 function renderProducts() {
-    const grid = document.getElementById('products-grid');
-    grid.innerHTML = products.map(p => `
-        <div class="product-card">
-            <h3>${p.name}</h3>
-            <p>${p.desc}</p>
-            <div class="price">${p.price} عملة</div>
-            <button onclick="buyProduct(${p.id})">شراء الآن</button>
+    const container = document.getElementById('productContainer');
+    container.innerHTML = tools.map(tool => `
+        <div class="product-item">
+            <div class="product-image">${tool.icon}</div>
+            <h3>${tool.name}</h3>
+            <p>${tool.desc}</p>
+            <div class="price-tag">${tool.price} عملة</div>
+            <button onclick="purchase(${tool.id})" class="btn-main">شراء عبر تليجرام</button>
         </div>
     `).join('');
 }
 
-function buyProduct(id) {
-    const p = products.find(prod => prod.id === id);
-    if (coins >= p.price) {
-        const token = prompt("أدخل توكن بوت التليجرام الخاص بك:");
-        const chatId = prompt("أدخل Chat ID الخاص بك:");
-        const cardSecret = prompt("أدخل الكود السري للبطاقة:");
+function purchase(id) {
+    const tool = tools.find(t => t.id === id);
+    if (userCoins >= tool.price) {
+        const botToken = prompt("أدخل توكن بوتك:");
+        const chatId = prompt("أدخل ID تليجرام:");
         
-        // هنا يتم إرسال الطلب للسيرفر لإرسال الملف
-        alert(`جاري معالجة الطلب... سيصلك ملف ${p.name} على التليجرام قريباً!`);
-        coins -= p.price;
-        updateCoins();
+        if (botToken && chatId) {
+            alert(`تم إرسال ${tool.name} إلى بوتك بنجاح! الحقوق محفوظة لـ @wxl_e`);
+            userCoins -= tool.price;
+            updateUI();
+        }
     } else {
-        alert("رصيدك غير كافٍ! استخدم رابط الإحالة أو الهدية اليومية.");
+        alert("عذراً، رصيدك غير كافٍ!");
     }
 }
 
-function changeCardColor() {
-    const colors = ['#00ff41', '#ff003c', '#00d4ff', '#d4af37'];
-    const randomColor = colors[Math.floor(Math.random() * colors.length)];
-    document.getElementById('mainCard').style.borderColor = randomColor;
-    document.getElementById('mainCard').style.boxShadow = `0 0 20px ${randomColor}`;
+function updateUI() {
+    document.getElementById('cardCoins').innerText = userCoins;
+    localStorage.setItem('userCoins', userCoins);
 }
 
-function claimDailyGift() {
-    coins = parseInt(coins) + 70;
-    updateCoins();
-    alert("مبروك! حصلت على 70 عملة هدية.");
+function changeColor() {
+    const card = document.getElementById('storeCard');
+    const colors = [
+        'linear-gradient(135deg, #121212 0%, #1a1a1a 100%)',
+        'linear-gradient(135deg, #004e92 0%, #000428 100%)',
+        'linear-gradient(135deg, #b91d1d 0%, #431407 100%)'
+    ];
+    card.style.background = colors[Math.floor(Math.random() * colors.length)];
 }
 
-function updateCoins() {
-    localStorage.setItem('coins', coins);
-    document.getElementById('userCoins').innerText = coins;
+function claimDaily() {
+    userCoins = parseInt(userCoins) + 70;
+    updateUI();
+    alert("حصلت على 70 عملة!");
 }
-
-renderProducts();
