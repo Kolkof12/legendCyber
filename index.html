@@ -3,46 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WXL-E STORE | Pro Tools</title>
+    <title>WXL-E STORE | Exclusive Tech</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="dark-theme">
-    
-    <nav>
-        <div class="logo">WXL-E <span>STORE</span></div>
-        <div class="nav-links">
-            <select id="langSwitcher" onchange="switchLanguage()">
-                <option value="ar">العربية</option>
-                <option value="en">English</option>
-                <option value="ru">Русский</option>
-            </select>
-            <span class="coins-display"><i class="fas fa-coins"></i> <span id="userCoins">0</span></span>
-        </div>
-    </nav>
+<body>
 
-    <section class="hero">
-        <div class="card-container" id="mainCard">
-            <div class="card-chip"></div>
-            <div class="card-brand">WXL-E PLATINUM</div>
-            <div class="card-number">8821 • 4409 • 1102 • XXXX</div>
-            <div class="card-holder">HOLDER: @wxl_e</div>
-            <div class="card-secret">SECRET CODE: <span id="cardCode">******</span></div>
-        </div>
-        <button class="btn-neon" onclick="changeCardColor()">Change Color / تغيير اللون</button>
-    </section>
-
-    <div class="bonus-box">
-        <button onclick="claimDailyGift()" class="btn-gift"><i class="fas fa-gift"></i> الهدية اليومية (70+)</button>
-        <div class="ref-link">
-            <p>رابط الإحالة الخاص بك (اربح 50 عملة):</p>
-            <input type="text" readonly value="https://wxl-e-store.com/ref/user123" id="refUrl">
-            <button onclick="copyRef()">نسخ</button>
+    <div id="auth-page" class="auth-container">
+        <div class="auth-box">
+            <h1 class="glitch" data-text="WXL-E ACADEMY">WXL-E ACADEMY</h1>
+            <p>سجل دخولك للوصول إلى الأدوات والكورسات</p>
+            <input type="text" id="username" placeholder="اسم المستخدم">
+            <input type="password" id="password" placeholder="كلمة المرور">
+            <button onclick="login()" class="btn-main">دخول إلى المتجر</button>
         </div>
     </div>
 
-    <main id="products-grid" class="products-grid">
-        </main>
+    <div id="store-page" class="store-container" style="display: none;">
+        <nav class="navbar">
+            <div class="logo">WXL-E <span>STORE</span></div>
+            <div class="nav-controls">
+                <select id="lang" class="lang-select">
+                    <option value="ar">العربية</option>
+                    <option value="en">English</option>
+                    <option value="ru">Русский</option>
+                </select>
+                <button onclick="logout()" class="btn-logout">خروج</button>
+            </div>
+        </nav>
+
+        <header class="hero-section">
+            <div class="card-visual" id="storeCard">
+                <div class="card-inner">
+                    <div class="card-top">
+                        <span class="chip"></span>
+                        <span class="provider">PLATINUM</span>
+                    </div>
+                    <div class="card-balance">
+                        <p>الرصيد الحالي</p>
+                        <h3><i class="fas fa-coins"></i> <span id="cardCoins">0</span></h3>
+                    </div>
+                    <div class="card-info">
+                        <p class="number">**** **** **** 8821</p>
+                        <p class="holder">HOLDER: @wxl_e</p>
+                    </div>
+                </div>
+            </div>
+            <button onclick="changeColor()" class="btn-secondary">تغيير ستايل البطاقة</button>
+        </header>
+
+        <section class="bonus-area">
+            <div class="gift-card" onclick="claimDaily()">
+                <i class="fas fa-box-open"></i>
+                <span>هدية يومية (70 عملة)</span>
+            </div>
+            <div class="ref-card">
+                <p>شارك الرابط واربح 50 عملة عن كل صديق:</p>
+                <div class="copy-box">
+                    <input type="text" readonly value="https://wxl-e.store/ref/user77" id="refLink">
+                    <button onclick="copyRef()">نسخ</button>
+                </div>
+            </div>
+        </section>
+
+        <h2 class="section-title">الأدوات والكورسات المتاحة</h2>
+        <div class="products-grid" id="productContainer">
+            </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
