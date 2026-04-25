@@ -3,71 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WXL-E STORE | Exclusive Tech</title>
+    <title>WXL-E ACADEMY & STORE</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-    <div id="auth-page" class="auth-container">
-        <div class="auth-box">
-            <h1 class="glitch" data-text="WXL-E ACADEMY">WXL-E ACADEMY</h1>
-            <p>سجل دخولك للوصول إلى الأدوات والكورسات</p>
-            <input type="text" id="username" placeholder="اسم المستخدم">
-            <input type="password" id="password" placeholder="كلمة المرور">
-            <button onclick="login()" class="btn-main">دخول إلى المتجر</button>
+    <div id="auth-screen" class="auth-wrapper">
+        <div class="auth-card">
+            <div class="glitch-logo" data-text="WXL-E">WXL-E</div>
+            <h2>إنشاء حساب / دخول</h2>
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" id="username" placeholder="اسم المستخدم">
+            </div>
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="password" placeholder="كلمة المرور">
+            </div>
+            <button onclick="enterStore()" class="btn-glow">دخول للمنصة</button>
+            <p class="auth-footer">WXL-E Academy System v2.0</p>
         </div>
     </div>
 
-    <div id="store-page" class="store-container" style="display: none;">
-        <nav class="navbar">
-            <div class="logo">WXL-E <span>STORE</span></div>
-            <div class="nav-controls">
-                <select id="lang" class="lang-select">
+    <div id="main-store" class="store-wrapper" style="display: none;">
+        <nav class="top-nav">
+            <div class="brand-name">WXL-E <span>STORE</span></div>
+            <div class="nav-utils">
+                <select id="langSwitcher" onchange="changeLang()">
                     <option value="ar">العربية</option>
                     <option value="en">English</option>
                     <option value="ru">Русский</option>
                 </select>
-                <button onclick="logout()" class="btn-logout">خروج</button>
+                <button onclick="exitStore()" class="btn-exit"><i class="fas fa-sign-out-alt"></i></button>
             </div>
         </nav>
 
-        <header class="hero-section">
-            <div class="card-visual" id="storeCard">
-                <div class="card-inner">
-                    <div class="card-top">
-                        <span class="chip"></span>
-                        <span class="provider">PLATINUM</span>
+        <header class="dashboard-header">
+            <div class="premium-card" id="digitalCard">
+                <div class="card-glass">
+                    <div class="card-head">
+                        <img src="https://cdn-icons-png.flaticon.com/512/6404/6404100.png" class="chip">
+                        <span class="card-type">WXL-E PLATINUM</span>
                     </div>
-                    <div class="card-balance">
-                        <p>الرصيد الحالي</p>
-                        <h3><i class="fas fa-coins"></i> <span id="cardCoins">0</span></h3>
+                    <div class="card-balance-box">
+                        <p id="txt-balance">رصيدك الحالي</p>
+                        <h2 id="coin-amount"><i class="fas fa-coins"></i> 500</h2>
                     </div>
-                    <div class="card-info">
-                        <p class="number">**** **** **** 8821</p>
-                        <p class="holder">HOLDER: @wxl_e</p>
+                    <div class="card-footer">
+                        <span class="card-id">ID: @wxl_e</span>
+                        <span class="card-secret">SECRET: <span id="secretCode">****</span></span>
                     </div>
                 </div>
             </div>
-            <button onclick="changeColor()" class="btn-secondary">تغيير ستايل البطاقة</button>
+            <div class="card-actions">
+                <button onclick="toggleCardColor()" class="btn-action"><i class="fas fa-palette"></i> تغيير اللون</button>
+                <button onclick="getDailyGift()" class="btn-action gift"><i class="fas fa-gift"></i> هدية 70 عملة</button>
+            </div>
         </header>
 
-        <section class="bonus-area">
-            <div class="gift-card" onclick="claimDaily()">
-                <i class="fas fa-box-open"></i>
-                <span>هدية يومية (70 عملة)</span>
-            </div>
-            <div class="ref-card">
-                <p>شارك الرابط واربح 50 عملة عن كل صديق:</p>
-                <div class="copy-box">
-                    <input type="text" readonly value="https://wxl-e.store/ref/user77" id="refLink">
-                    <button onclick="copyRef()">نسخ</button>
-                </div>
+        <section class="referral-banner">
+            <p id="txt-ref">اربح 50 عملة بدعوة صديق:</p>
+            <div class="ref-input">
+                <input type="text" readonly value="https://wxl-e.store/invite/user123">
+                <button onclick="copyRef()">نسخ</button>
             </div>
         </section>
 
-        <h2 class="section-title">الأدوات والكورسات المتاحة</h2>
-        <div class="products-grid" id="productContainer">
+        <h2 class="title-section" id="txt-products">المنتجات الحصرية</h2>
+        <div class="products-container" id="productsGrid">
             </div>
     </div>
 
